@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { setBasicDetails, setState } from '../../../store/headerSlice';
 
 function BasicDetails() {
+  const [message, setMessage] = useState('');
+  const [response, setResponse] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -13,6 +16,18 @@ function BasicDetails() {
 
   const dispatch = useDispatch();
 
+  const optimizeAboutme = (e) => {
+    e.preventDefault();
+    fetch('http://localhost:5000/api/optimizers', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ message }),
+    })
+      .then((res) => res.json())
+      .then((data) => setResponse(data.message));
+  };
   const onSubmit = (data) => {
     console.log(data);
     dispatch(setBasicDetails(data));
@@ -96,7 +111,13 @@ function BasicDetails() {
             rows="3"
             placeholder="About me"
             {...register('aboutMe')}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           ></textarea>
+          optimized:{response}
+          <button className="bg-black text-white p-1" onClick={optimizeAboutme}>
+            optimize with ai
+          </button>
           <textarea
             className="outline-none p-2  rounded-md"
             rows="3"
