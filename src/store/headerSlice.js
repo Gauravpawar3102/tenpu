@@ -2,66 +2,70 @@ import { createSlice, combineReducers } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
 
 const basicDetails = {
-  aboutMe: '',
-  careerObjective: '',
-  email: '',
   fullName: '',
-
+  email: '',
   location: '',
   phone: '',
+  urls: {
+    urlName: '',
+    url: '',
+  },
+};
+const totalWorkExperience = null;
+const summary = '';
+const skills = [];
+const careerObjective = '';
+
+const companyDetails = {
   title: '',
-  totalWorkExperience: '',
-  websiteUrl: '',
-};
-const skillDetails = {
-  frameworks: [],
-  previousRoles: [],
-  programmingLanguages: [],
-  technologies: [],
-  tools: [],
-};
-const professionalSummary = {
-  summary: '',
-};
-const workExperience = [
-  {
-    companyName: '',
-    position: '',
-    startDate: '',
-    currentJob: false,
-    endDate: '',
-    years: '',
-    points: [''],
+  companyName: '',
+  startDate: '',
+  endDate: '',
+  location: {
+    city: '',
+    country: '',
   },
-];
-const achievements = [
+  workSummary: '',
+};
+const projectDetails = {
+  title: '',
+  projectSummary: '',
+  projectDate: '',
+  projectUrl: '',
+};
+const educationDetails = [
   {
-    title: '',
-    date: '',
-    organizationName: '',
-  },
-];
-const education = [
-  {
-    instituteName: '',
     degree: '',
+    instituteName: '',
     branch: '',
-    location: '',
-    grade: '',
     startDate: '',
     endDate: '',
+    location: '',
+    gpa: '',
   },
 ];
+const certificationDetails = [
+  {
+    certificateName: ' ',
+    certificateProvider: '',
+    certificateDate: '',
+    description: ' ',
+  },
+];
+
 export const headerSlice = createSlice({
   name: 'header',
   initialState: {
     headerState: 1,
     basicDetails,
-    skillDetails,
-    professionalSummary,
-    workExperience,
-    achievements,
-    education,
+    totalWorkExperience,
+    summary,
+    skills,
+    careerObjective,
+    companyDetails,
+    projectDetails,
+    educationDetails,
+    certificationDetails,
   },
   reducers: {
     setState: (state, action) => {
@@ -75,23 +79,35 @@ export const headerSlice = createSlice({
       console.log(state);
       state.basicDetails = action.payload;
     },
-    setSkillDetails: (state, action) => {
+    setTotalWorkExperience: (state, action) => {
       // console.log(action);
       // console.log(state);
 
-      state.skillDetails = action.payload;
+      state.totalWorkExperience = action.payload;
     },
-    setProfessionalSummary: (state, action) => {
-      state.professionalSummary = action.payload;
+    setSummary: (state, action) => {
+      state.summary = action.payload;
     },
-    setWorkExperience: (state, action) => {
-      state.workExperience = action.payload.companiesList;
+    setSkills: (state, action) => {
+      state.skills = action.payload;
     },
-    setAchievements: (state, action) => {
-      state.achievements = action.payload;
+    setCareerObjective: (state, action) => {
+      // console.log(action);
+      // console.log(state);
+
+      state.careerObjective = action.payload;
     },
-    setEducation: (state, action) => {
-      state.education = action.payload;
+    setCompanyDetails: (state, action) => {
+      state.companyDetails = action.payload;
+    },
+    setProjectDetails: (state, action) => {
+      state.projectDetails = action.payload;
+    },
+    setEducationDetails: (state, action) => {
+      state.educationDetails = action.payload;
+    },
+    setCertificationDetails: (state, action) => {
+      state.certificationDetails = action.payload;
     },
   },
 });
@@ -101,9 +117,12 @@ export default headerSlice.reducer;
 export const {
   setState,
   setBasicDetails,
-  setSkillDetails,
-  setProfessionalSummary,
-  setWorkExperience,
-  setAchievements,
-  setEducation,
+  setTotalWorkExperience,
+  setSummary,
+  setSkills,
+  setCareerObjective,
+  setCompanyDetails,
+  setProjectDetails,
+  setEducationDetails,
+  setCertificationDetails,
 } = headerSlice.actions;
